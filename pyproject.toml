@@ -1,0 +1,11 @@
+[project]
+name = "ADIS16465DgPy"
+dynamic = ['version']
+
+[build-system]
+requires = ["setuptools>=64","numpy", "setuptools_scm[toml]>=5"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools_scm]
+# Note: With recent setuptools we can use "version_file" instead of "write_to"
+write_to = "ADIS16465DgPy/_version.py"

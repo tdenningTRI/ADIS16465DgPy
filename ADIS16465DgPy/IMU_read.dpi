@@ -1,0 +1,23 @@
+from dataguzzler_python import dgpy
+import spatialnde2 as snde
+import os
+from ADIS16465DgPy.dgpy_ADIS16465 import ADIS_IMU
+from ADIS16460DgPy.ADIS16460 import IMU
+
+timestamp_clock = None
+
+accel_channel_path = "/accelerometer"
+gyro_channel_path = "/gyro"
+sample_rate = 20
+taps = 4
+burst_mode = True
+imu_n_measurements_per_batch = 1
+
+imu_object = IMU(sampleRate=sample_rate,
+                 taps=taps,
+                 burstMode=burst_mode,
+                 timestamp_clock = timestamp_clock
+                 )
+imu = ADIS_IMU('imu', recdb = recdb, accel_channel_path=accel_channel_path,gyro_channel_path=gyro_channel_path, imu = imu_object, 
+               imu_n_measurements_per_batch=imu_n_measurements_per_batch)
+return imu

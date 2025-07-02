@@ -1,0 +1,32 @@
+from dataguzzler_python import dgpy
+import spatialnde2 as snde
+include(dgpy,"dgpy_startup.dpi") # If you get a NameError here, be sure you are executing this file with dataguzzler-python
+
+include(dgpy,"Qt.dpi",prefer_pyqt=False)
+
+include(snde,"recdb.dpi",enable_opencl=True)
+include(snde,"recdb_gui.dpi")
+
+from ADIS16465DgPy import dgpy_ADIS16465 as adis
+from ADIS16465DgPy.ADIS16465 import IMU
+
+orient_dtype = [('quat', '<f4', (4,)), ('offset', '<f4', (4,)) ]
+
+timestamp_clock=snde.measurement_clock_cpp_system("")
+
+transmgr=snde.timed_transaction_manager(timestamp_clock,0.50)
+
+# include(dgpy,"Qt.dpi",prefer_pyqt=False)
+# include(snde,"recdb.dpi",transmgr = transmgr,enable_opencl=True)
+
+include(snde,"recdb.dpi",enable_opencl=True)
+# include(snde,"recdb_gui.dpi")
+
+imu_sample_rate = 22
+imu_burst_mode = False
+imu_n_measurements_per_batch = 1
+
+imuObject = IMU(sampleRate=imu_sample_rate, taps = 64, burstMode=imu_burst_mode, debug = False, timestamp_clock=timestamp_clock)
+
+imu = include(adis, "IMU_read.dpi", imu_object = imuObject, imu_n_measurements_per_batch=imu_n_measurements_per_batch)
+
