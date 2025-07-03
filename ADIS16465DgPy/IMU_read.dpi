@@ -2,7 +2,7 @@ from dataguzzler_python import dgpy
 import spatialnde2 as snde
 import os
 from ADIS16465DgPy.dgpy_ADIS16465 import ADIS_IMU
-from ADIS16460DgPy.ADIS16460 import IMU
+from ADIS16465DgPy.ADIS16465 import IMU
 
 timestamp_clock = None
 

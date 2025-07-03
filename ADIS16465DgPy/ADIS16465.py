@@ -1,7 +1,5 @@
 """
-Library for retrieving data from the ADIS16465 AMU on a Windows PC using a USB to serial convertor.
-Requirements:MSVCR100.dll/MSVCP100.dll from Microsoft Visual C++ 2010 Redistributable. 
-These DLLs (or the package) should already be installed on most systems.
+
 """
 
 import ft4222
@@ -268,19 +266,16 @@ class IMU:
 
 
 if __name__ == "__main__":
-    o = IMU(sampleRate=600, debug = True)
+    import spatialnde2 as snde
+    timestamp_clock=snde.measurement_clock_cpp_steady("")
+    o = IMU(sampleRate=180, taps = 16, debug = True, burstMode= False, n_batches=1, timestamp_clock=timestamp_clock)
     ns = 0
-    # o.read()
-    # o.update()
-    last = time_ns()
-    print(o.read_from_register(0x7200).hex())
-    o.update()
-    # o.update()
+
     count = 0
     try:
         while(1):
-            
-            o.update()
+            o.gpio.gpio_Wait(3, 1, 0)
+            o.read()
             count += 1
             # time.sleep(0.5)
             # ns = last - o.timestamp
