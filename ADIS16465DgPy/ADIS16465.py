@@ -260,9 +260,9 @@ class IMU:
         
         Returns: None
         """
-        self.gyroScaleFactor = 0.005/(2**(16))
+        self.gyroScaleFactor = 0.00625/(2**(16))
         if self.burstMode:
-            self.gyroScaleFactor = 0.005/(2**(0))
+            self.gyroScaleFactor = 0.00625/(2**(0))
 
 
 if __name__ == "__main__":
